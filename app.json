@@ -1,0 +1,17 @@
+{
+  "name": "AppShop",
+  "displayName": "AppShop",
+  "expo": {
+    "name": "AppShop",
+    "slug": "AppShop",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
