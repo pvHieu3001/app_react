@@ -1,6 +1,6 @@
 class Product{
     constructor(id, ownerId, title, imageUrl, description, price){
-        this.id = ig;
+        this.id = id;
         this.ownerId = ownerId; 
         this.title = title; 
         this.imageUrl = imageUrl; 
@@ -8,3 +8,5 @@ class Product{
         this.price = price;
     }
 }
+
+export default Product;
