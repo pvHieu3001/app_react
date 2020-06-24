@@ -1,15 +1,15 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, Button, TouchableOpacity, Platform} from 'react-native';
 import Colors from '../../constants/Colors';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
+//import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const ProductItem = props => {
-    let TouchableCmp = TouchableOpacity;
-    if(Platform.OS === 'android' && Platform.Version>=21){
-        TouchableCmp = TouchableNativeFeedback;
-    }
+    // let TouchableCmp = TouchableOpacity;
+    // if(Platform.OS === 'android' && Platform.Version>=21){
+    //     TouchableCmp = TouchableNativeFeedback;
+    // }
     return (
-        <TouchableCmp onPress={props.onViewDetail} useForeground>
+        //<TouchableCmp onPress={props.onViewDetail} useForeground>
             <View style={styles.product}>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={{uri: props.image}}></Image>
@@ -25,7 +25,7 @@ const ProductItem = props => {
                     <Button color={Colors.primary} title='Add to cart' onPress={props.onAddToCart}></Button>
                 </View>
             </View>
-        </TouchableCmp>
+        //</TouchableCmp>
     );
 }
 
