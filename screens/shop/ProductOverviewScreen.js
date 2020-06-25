@@ -35,14 +35,14 @@ ProductOverviewScreen.navigationOptions = navData => {
     return {
         headerTitle: "All Products",
 
-        headerLeft:(
+        headerLeft:() =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName='md-menu' 
                             onPress={()=>{
                                 navData.navigation.toggleDrawer();
                             }}>
                 </Item>
-            </HeaderButtons>),
+            </HeaderButtons>,
 
         headerRight:() =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>

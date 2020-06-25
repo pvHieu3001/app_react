@@ -4,14 +4,18 @@ import {useSelector} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../components/UI/HeaderButton';
+import OrderItem from '../../components/shop/OrderItem';
 
 const OrderScreen = props => {
-    const orders = useSelector(state => state.orders);
+    const orders = useSelector(state => state.orders.orders);
     return (
         <FlatList
             data={orders}
             keyExtractor={item => item.id}
-            renderItem={itemdata=> <Text>{itemdata.item.totalAmount}</Text>}
+            renderItem={itemdata=> <OrderItem
+                amount={itemdata.item.totalAmount}
+                date={itemdata.item.readableDate}
+            />}
         />
     );
 }
@@ -27,7 +31,7 @@ OrderScreen.navigationOptions = navData => {
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName='md-menu' 
                             onPress={()=>{
-                                navData.navigation.toggleDrawer()
+                                navData.navigation.toggleDrawer();
                             }}>
                 </Item>
             </HeaderButtons>,
