@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, Button, TouchableOpacity, Platform} from 'react-native';
-import Colors from '../../constants/Colors';
+
 //import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const ProductItem = props => {
@@ -21,8 +21,7 @@ const ProductItem = props => {
                 </View>
                 
                 <View style={styles.actions}>
-                    <Button color={Colors.primary} title='View detail' onPress={props.onViewDetail}></Button>
-                    <Button color={Colors.primary} title='Add to cart' onPress={props.onAddToCart}></Button>
+                    {props.children}
                 </View>
             </View>
         //</TouchableCmp>

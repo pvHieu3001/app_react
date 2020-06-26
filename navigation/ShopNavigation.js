@@ -10,7 +10,9 @@ import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import OrderScreen from '../screens/shop/OrderScreen'
 import Color from '../constants/Colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import UserProductSreen from '../screens/user/UserProductSreen';
+import EditProductScreen from '../screens/user/EditProductScreen';
+
 
 const defaultNavOptions = {
     headerStyle:{
@@ -49,14 +51,30 @@ const OrdersNavigator = createStackNavigator(
     }
 );
 
+const AdminNavigator = createStackNavigator(
+    {
+        UserProduct: UserProductSreen,
+        EditProduct: EditProductScreen
+    },
+    {
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons name='md-create' size={23} color={drawerConfig.tintColor}/>
+            )
+        },
+        defaultNavigationOptions: defaultNavOptions
+    }
+);
+
 const ShopNavigator = createDrawerNavigator(
     {
     Products: ProductsNavigator,
-    Order: OrdersNavigator
+    Order: OrdersNavigator,
+    Admin: AdminNavigator
     },
     {
         contentOptions: {
-            activeTintColor: Colors.primary
+            activeTintColor: Color.primary
         }
     }
 );

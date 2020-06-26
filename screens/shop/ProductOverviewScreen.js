@@ -6,10 +6,18 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cart';
 import HeaderButton from '../../components/UI/HeaderButton';
+import Colors from '../../constants/Colors';
 
 const ProductOverviewScreen = props => {
-    const products = useSelector(state => state.products.avialableProducts);
+    const products = useSelector(state => state.products.availableProducts);
     const dispatch = useDispatch();
+    const viewDetailHandler = (id, title) => {
+        props.navigation.navigate('ProductDetail',{
+            productId: id,
+            productTitle: title
+        });
+    }
+
     return (
         <FlatList data={products}
             keyExtractor={item => item.id}
@@ -18,14 +26,10 @@ const ProductOverviewScreen = props => {
                     image={itemdata.item.imageUrl}
                     title={itemdata.item.title}
                     price={itemdata.item.price}
-                    onViewDetail={()=>{
-                        props.navigation.navigate('ProductDetail',{
-                            productId: itemdata.item.id,
-                            productTitle: itemdata.item.title
-                        });
-                    }}
-                    onAddToCart={()=>{dispatch(cartActions.addToCart(itemdata.item))}}
-                />
+                >
+                    <Button color={Colors.primary} title='View detail' onPress={()=>{viewDetailHandler(itemdata.item.id, itemdata.item.title)}}></Button>
+                    <Button color={Colors.primary} title='Add to cart' onPress={()=>{dispatch(cartActions.addToCart(itemdata.item))}}></Button>
+                </ProductItem>
             }
         />
     );
