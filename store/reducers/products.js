@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
             }
         case UPDATE_PRODUCT:
             const productIndex = state.availableProducts.findIndex(prod => prod.id === action.pid);
+            console.log(state.availableProducts[productIndex].ownerId);
             const updateProduct = new Product(
                 action.productData.id,
                 state.availableProducts[productIndex].ownerId,
