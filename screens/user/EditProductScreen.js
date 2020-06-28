@@ -1,15 +1,17 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {View, StyleSheet, Text, Button, ScrollView,TextInput} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 
 import HeaderButton from '../../components/UI/HeaderButton';
+import * as productActions from '../../store/actions/products';
 
 const EditProductScreen = props => {
     const prodId = props.navigation.getParam('productId');
     const editedProduct = useSelector(state => 
         state.products.userProducts.find(prod => prod.id === prodId)
     );
+    const dispatch = useDispatch();
 
     const [title, setTitle] = useState(editedProduct ? editedProduct.title : '');
     const [imageUrl, setImageUrl] = useState(editedProduct ? editedProduct.imageUrl : '');
@@ -17,8 +19,16 @@ const EditProductScreen = props => {
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
     
     const submitHandler = useCallback(()=>{
-        console.log('submiting')
-    });
+        if(editedProduct){
+            dispatch(productActions.updateProduct(prodId, title, description, imageUrl, +price))
+        }else{
+            dispatch(productActions.createProduct(title, description, imageUrl, +price))
+        }
+    }, [dispatch, prodId, title, description, imageUrl, price]);
+
+    useEffect(()=>{
+        props.navigation.setParams({submit: submitHandler});
+    }, [submitHandler]);
 
     return (
         <ScrollView>
@@ -76,14 +86,13 @@ const styles = StyleSheet.create({
 });
 
 EditProductScreen.navigationOptions = navData => {
+    const submitFn = navData.navigation.getParam('submit')
     return {
         headerTitle: navData.navigation.getParam('productId') ? "Edit Product" : 'Add Product',
         headerRight:() =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Save" iconName='md-checkmark' 
-                            onPress={()=>{
-                                
-                            }}>
+                            onPress={submitFn}>
                 </Item>
             </HeaderButtons>,
     }
