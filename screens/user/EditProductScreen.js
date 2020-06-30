@@ -8,9 +8,12 @@ import * as productActions from '../../store/actions/products';
 
 const EditProductScreen = props => {
     const prodId = props.navigation.getParam('productId');
+    
     const editedProduct = useSelector(state => 
         state.products.userProducts.find(prod => prod.id === prodId)
     );
+    console.log(prodId);
+    console.log(editedProduct);
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState(editedProduct ? editedProduct.title : '');
@@ -24,7 +27,8 @@ const EditProductScreen = props => {
         }else{
             dispatch(productActions.createProduct(title, description, imageUrl, +price))
         }
-        props.navigation.goBack()
+        props.navigation.goBack();
+        
     }, [dispatch, prodId, title, description, imageUrl, price]);
 
     useEffect(()=>{
